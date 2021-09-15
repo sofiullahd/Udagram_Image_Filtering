@@ -29,22 +29,37 @@ We've included a few helper functions to handle some of these concepts and we're
 import {filterImageFromURL, deleteLocalFiles} from './util/util';
 ```
 
-### Deploying your system
+### Deploying my system
 
-Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service! Don't forget you can use `eb deploy` to push changes.
+Follow the process described in the course to `eb init` a new application and `eb create` a new environment to deploy your image-filter service! 
+I encounterd aome issue on this part: " ERROR: TypeError - argument of type 'NoneType' is not iterable"
+Reoslved by configuring my code source to local. i.e. eb codesource
+------My screen below------
+PS C:\Dev\Newt\image-filter-starter-code> eb codesource
+Current CodeCommit setup:
+  Repository: Image-Filtering-udagram
+  Branch: Master
+Select your codesource
+1) CodeCommit
+2) Local
+(default is 2): 2
+------------------------------------------------------
 
-## Stand Out (Optional)
 
-### Refactor the course RESTapi
+### Other issue during deployment
 
-If you're feeling up to it, refactor the course RESTapi to make a request to your newly provisioned image server.
+1.	I encountered lots of communication issues as my enviroment do not allow me to installed all the required packages. i.e. Ionic, express and even aws ebcli 
+**Resolution:** had to add a proxy variable to my environment variable to grant access.
+---example---
+Variable name: http_proxy
+Variable value: http://proxy-addres:port-number
 
-### Authentication
+2.	Also encounter issue using git but resolve by git config --global --add remote.origin.proxy "http://my-proxy-address:port
 
-Prevent requests without valid authentication headers.
-> !!NOTE if you choose to submit this, make sure to add the token to the postman collection and export the postman collection file to your submission so we can review!
+3.  Also encountered Issues creating zip files (Archive.zip) on the package.json:
+    **Resolved:** by installing 7zip and adding path to the environment variable
 
-### Custom Domain Name
+4.  Another issues with ssh during eb init
+    **Resolved:**  by installing an Openssh and add the path to my environment variable
 
-Add your own domain name and have it point to the running services (try adding a subdomain name to point to the processing server)
-> !NOTE: Domain names are not included in AWS’ free tier and will incur a cost.
+
